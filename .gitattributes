@@ -1,0 +1,6 @@
+* text=auto eol=lf
+
+*.lua text
+*.md text diff=markdown
+.gitignore text
+.gitattributes text

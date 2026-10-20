@@ -1,0 +1,9 @@
+/doc/tags
+
+.vscode/
+.idea/
+.zed/
+
+.DS_Store
+*.swp
+*~
