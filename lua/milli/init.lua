@@ -1,13 +1,22 @@
 local M = {}
 
+local config = {
+  transparent = false,
+}
+
+function M.setup(opts)
+  config = vim.tbl_deep_extend('force', config, opts or {})
+end
+
 local function highlights(p)
+  local bg = config.transparent and 'NONE' or p.bg
   return {
-    Normal = { fg = p.fg, bg = p.bg },
+    Normal = { fg = p.fg, bg = bg },
     NormalNC = { link = 'Normal' },
-    NormalFloat = { fg = p.fg, bg = p.bg },
-    FloatBorder = { fg = p.border, bg = p.bg },
-    FloatTitle = { fg = p.fg, bg = p.bg, bold = true },
-    WinSeparator = { fg = p.border, bg = p.bg },
+    NormalFloat = { fg = p.fg, bg = bg },
+    FloatBorder = { fg = p.border, bg = bg },
+    FloatTitle = { fg = p.fg, bg = bg, bold = true },
+    WinSeparator = { fg = p.border, bg = bg },
     VertSplit = { link = 'WinSeparator' },
     EndOfBuffer = { fg = p.bg },
 
@@ -16,7 +25,7 @@ local function highlights(p)
     CursorLine = { bg = p.cursor_line },
     CursorColumn = { bg = p.cursor_line },
     ColorColumn = { bg = p.wrap_guide },
-    SignColumn = { bg = p.bg },
+    SignColumn = { bg = bg },
     Folded = { fg = p.muted, bg = p.surface },
     FoldColumn = { fg = p.line_nr },
     Cursor = { fg = p.bg, bg = p.fg },
@@ -54,13 +63,13 @@ local function highlights(p)
     PmenuMatchSel = { fg = p.blue, bg = p.element_selected, bold = true },
     WildMenu = { link = 'PmenuSel' },
 
-    StatusLine = { fg = p.fg, bg = p.bg },
-    StatusLineNC = { fg = p.muted, bg = p.bg },
-    TabLine = { fg = p.muted, bg = p.bg },
+    StatusLine = { fg = p.fg, bg = bg },
+    StatusLineNC = { fg = p.muted, bg = bg },
+    TabLine = { fg = p.muted, bg = bg },
     TabLineSel = { fg = p.fg, bg = p.active_tab },
-    TabLineFill = { bg = p.bg },
-    WinBar = { fg = p.fg, bg = p.bg },
-    WinBarNC = { fg = p.muted, bg = p.bg },
+    TabLineFill = { bg = bg },
+    WinBar = { fg = p.fg, bg = bg },
+    WinBarNC = { fg = p.muted, bg = bg },
 
     DiffAdd = { bg = p.added_bg },
     DiffChange = { bg = p.modified_bg },
@@ -200,17 +209,17 @@ local function highlights(p)
     ['@lsp.type.macro'] = { link = '@function.macro' },
     ['@lsp.typemod.variable.defaultLibrary'] = { link = '@variable.builtin' },
 
-    TelescopeNormal = { fg = p.fg, bg = p.bg },
-    TelescopeBorder = { fg = p.border, bg = p.bg },
+    TelescopeNormal = { fg = p.fg, bg = bg },
+    TelescopeBorder = { fg = p.border, bg = bg },
     TelescopeTitle = { fg = p.fg, bold = true },
     TelescopeSelection = { bg = p.element_selected },
     TelescopeSelectionCaret = { fg = p.blue, bg = p.element_selected },
     TelescopeMatching = { fg = p.blue, bold = true },
     TelescopePromptPrefix = { fg = p.blue },
 
-    NeoTreeNormal = { fg = p.fg, bg = p.bg },
+    NeoTreeNormal = { fg = p.fg, bg = bg },
     NeoTreeNormalNC = { link = 'NeoTreeNormal' },
-    NeoTreeEndOfBuffer = { fg = p.bg, bg = p.bg },
+    NeoTreeEndOfBuffer = { fg = p.bg, bg = bg },
     NeoTreeWinSeparator = { link = 'WinSeparator' },
     NeoTreeCursorLine = { bg = p.element_selected },
     NeoTreeRootName = { fg = p.fg, bold = true },
